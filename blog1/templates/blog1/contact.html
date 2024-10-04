@@ -1,0 +1,23 @@
+{% extends 'blog1/base.html' %}
+{% block content %}
+    <section class="contact">
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quaerat autem corrupti asperiores accusantium et fugiat. Facere excepturi, quo eos, nobis doloremque dolor labore expedita illum justo, aut repellat fugiat.</p>
+                <div class="cont">
+                    <p><i class="fa-light fa-location-dot"></i>34 Street Name, City Name Here, United States</p>
+                    <p><i class="fa-light fa-phone"></i>+1 (222) 345 6789</p>
+                    <p><i class="fa-light fa-envelope"></i>info@mywebsite.com</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="48b64498-4bdd-43ea-aea8-084fb5b522cb">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+    </section>
+{% endblock content %}

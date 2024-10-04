@@ -1,0 +1,19 @@
+{% extends 'blog1/base.html' %}
+{% block content %}
+
+<div class="container-details">
+    <div class="details-info">
+          <div class="details-image">
+            {% if object.image_url %}
+              <img src="{{ object.image_url }}" alt="{{ object.title }}">
+            {% else %}
+              <p>No Image</p>
+            {% endif %}
+          </div>
+          <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
+          <p class=" text-muted">{{ post.author }} || {{ post.created_on }}</p>
+          <p class="card-text ">{{ object.content | safe }}</p>
+    </div>
+  </div>
+
+{% endblock content %}
