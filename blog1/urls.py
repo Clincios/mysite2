@@ -11,4 +11,7 @@ urlpatterns = [
     path("contact/",views.ContactForm_view, name="contact"),
     path("search/", views.search_results, name="search"),
     path("<slug:slug>/",views.PostDetail.as_view(), name ="details"),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
