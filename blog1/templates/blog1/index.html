@@ -14,7 +14,7 @@
                 <div class="author"><p>{{ post.author }} || {{ post.created_on }}</p></div>
                 <div class="excerpt"><p>{{ post.content|truncatechars:200 }}</p></div>
                 <div class="btn-primary">
-                    <a href="{% url 'details' post.slug  %}">Read More &rarr;</a>
+                    <a href="{% url 'blog1:details' post.slug  %}">Read More &rarr;</a>
                 </div>
             </div>
         </div>

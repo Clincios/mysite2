@@ -4,7 +4,7 @@ from .forms import ContactForm
 from django.conf import settings
 from django.conf.urls.static import static
 
-
+app_name = 'blog1'
 
 urlpatterns = [
     path("",views.PostList.as_view(), name ="index"),

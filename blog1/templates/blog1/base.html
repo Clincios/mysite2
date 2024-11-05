@@ -12,15 +12,15 @@
         <div class="logo">CNN.</div>
         <div class="navf">
           <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'blog1:index' %}">Home</a></li>
             <li><a href="">About</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'blog1:contact' %}">Contact</a></li>
             <li><a href="">Get Started</a></li>
         </ul>
         </div>
 
         <div class="search">
-            <form action="{% url 'search' %}" method="get">
+            <form action="{% url 'blog1:search' %}" method="get">
                 <input type="text" placeholder="Search..." name="search_query">
                 <button>
                     <i class="fa fa-search"></i>

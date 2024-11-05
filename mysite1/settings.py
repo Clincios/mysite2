@@ -18,7 +18,8 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+# Environment mode: 'development' or 'production'
+DJANGO_ENV = config("DJANGO_ENV", default="development")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -26,7 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", cast=bool  )
+#DEBUG = config("DEBUG", cast=bool  )
+DEBUG = DJANGO_ENV == "development"
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
 
@@ -78,17 +80,22 @@ WSGI_APPLICATION = 'mysite1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DJANGO_ENV == "development":
+    # Local SQLite DB for development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+        # Use PostgreSQL or other DB via DATABASE_URL in production
+    DATABASES = {
+        'default': dj_database_url.parse(config("DATABASE_URL"))
+    }
 
 
-
-
-DATABASES["default"]= dj_database_url.parse(config("DATABASE_URL"))
+    #DATABASES["default"]= dj_database_url.parse(config("DATABASE_URL"))
 
 
 # Password validation
@@ -126,13 +133,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR/"staticfiles"
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+if DJANGO_ENV == "development":
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
+else:
+    # Production static settings
+    STATIC_ROOT = BASE_DIR / "staticfiles"
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

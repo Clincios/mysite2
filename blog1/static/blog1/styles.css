@@ -348,7 +348,7 @@ input::placeholder {
   }
 
 .contact-form button[type="submit"] {
-  background-color: #7489c6;
+  background-color: rgb(181, 31, 31);
   color: white;
   padding: 10px 45px;
   border: none;
@@ -413,4 +413,91 @@ input::placeholder {
   .pagination-bar li {
       margin-bottom: 10px;
   }
+/* ----------------------------------------------------Comments------------------------------------------------------------- */
+/* comments.css */
+
+/* Comment container */
+.comments {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Comment form */
+.comments form {
+  margin-bottom: 20px;
+}
+
+.comments label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.comments input[type="text"], .comments input[type="text"] {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.comments textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.comments button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* Comment list */
+.comments ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comments li {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.comments li:last-child {
+  border-bottom: none;
+}
+
+.comments strong {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.comments small {
+  font-size: 14px;
+  color: #666;
+}
+
+/* No comments message */
+.comments p {
+  text-align: center;
+  color: #666;
+}
 }

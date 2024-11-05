@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
+from django.urls import reverse
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.contrib import messages
 from django.views import generic
-from .models import Post
-from .models import Contact
-from .forms import ContactForm, SearchForm
+from .models import Post,Contact,Comment
+from .forms import ContactForm, SearchForm,CommentForm
 from django.core.paginator import Paginator
 from django.db.models import Q
 
@@ -24,6 +26,24 @@ class PostList(generic.ListView):
 class PostDetail(generic.DetailView):
     model = Post
     template_name = 'blog1/details.html'
+
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        form = CommentForm()
+        comments = post.comments.all()
+        context = {'post': post, 'form': form, 'comments': comments}
+        return render(request, self.template_name, context)
+
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+        else:
+            messages.error(request, 'Invalid comment form submission.')
+        return redirect(reverse_lazy('blog1:details', kwargs={'slug': slug}))
 
 def ContactForm_view(request):
     if request.method == 'POST':

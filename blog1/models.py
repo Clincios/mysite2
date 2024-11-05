@@ -33,3 +33,13 @@ class Contact(models.Model):
 
             class Meta:
                 ordering = ['name']
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    firstname = models.CharField(max_length=25)
+    lastname = models.CharField(max_length=25)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
