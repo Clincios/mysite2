@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -16,7 +17,7 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now= True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    image_url = models.URLField(max_length=200, blank=True, null=True)
+    image = CloudinaryField('image',default='path/to/default/https://res.cloudinary.com/dv21zubyl/image/upload/v1731135962/af6j0q3g6lzkp0tgto06.png')
     status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:

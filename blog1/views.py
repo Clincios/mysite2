@@ -26,13 +26,20 @@ class PostList(generic.ListView):
 class PostDetail(generic.DetailView):
     model = Post
     template_name = 'blog1/details.html'
+    context_object_name = 'post'
 
-    def get(self, request, slug):
-        post = get_object_or_404(Post, slug=slug)
-        form = CommentForm()
-        comments = post.comments.all()
-        context = {'post': post, 'form': form, 'comments': comments}
-        return render(request, self.template_name, context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm()
+        context['comments'] = self.object.comments.all()
+        return context
+
+    # def get(self, request, slug):
+    #     post = get_object_or_404(Post, slug=slug)
+    #     form = CommentForm()
+    #     comments = post.comments.all()
+    #     context = {'post': post, 'form': form, 'comments': comments}
+    #     return render(request, self.template_name, context)
 
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)

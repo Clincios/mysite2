@@ -4,8 +4,8 @@
 <div class="container-details">
     <div class="details-info">
           <div class="details-image">
-            {% if object.image_url %}
-              <img src="{{ object.image_url }}" alt="{{ object.title }}">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
             {% else %}
               <p>No Image</p>
             {% endif %}

@@ -4,8 +4,8 @@
     <div class="blog-cards">
         {% for post in post_list %}
         <div class="card">
-            {% if post.image_url %}
-                <img src="{{ post.image_url }}" alt="Article Imag">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="Article Imag">
             {% else %}
                 <p>No image</p>
             {% endif %}
