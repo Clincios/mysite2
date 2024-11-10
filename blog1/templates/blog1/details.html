@@ -16,27 +16,34 @@
     </div>
   </div>
   
-<div class="comments">
-    <h2>Comments</h2>
-    <!-- Comment form -->
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit Comment</button>
-  </form>
-
-  <!-- Comment list -->
-  <h2>Comments</h2>
-  <ul>
-    {% for comment in comments %}
-        <li>
-            <strong>{{ comment.firstname }} {{ comment.lastname }}</strong>||<small>Posted on {{ comment.created_on }}</small>
-            <p>{{ comment.body }}</p>
-        </li>
-    {% empty %}
-        <p>No comments yet.</p>
-    {% endfor %}
-  </ul>
+<div class="container-details">
+  <div class="details-info">
+    <div class="contact-form">
+      <h2>Add Comments</h2>
+      <!-- Comment form -->
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit Comment</button>
+    </form>
+  
+    <!-- Comment list -->
+     <div class="means">
+      <h2>Comments</h2>
+     </div>
+    <ul class="meant">
+      {% for comment in comments %}
+          <li>
+              <strong>{{ comment.firstname }} {{ comment.lastname }}</strong><small>Posted on {{ comment.created_on }}</small>
+              <p>{{ comment.body }}</p>
+          </li>
+      {% empty %}
+          <p>No comments yet.</p>
+      {% endfor %}
+    </ul>
+  </div>
+  </div>
 </div>
+
 
 {% endblock content %}
