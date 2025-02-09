@@ -13,7 +13,11 @@ class PostAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display=('firstname','lastname','body','created_on')
 
+class ContactAdmin(admin.ModelAdmin):
+    list_display=('name','email','message')
+
+
 admin.site.register(Post,PostAdmin)
 
 admin.site.register(Comment,CommentAdmin)
-admin.site.register(Contact)
+admin.site.register(Contact,ContactAdmin)

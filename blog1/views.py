@@ -77,6 +77,11 @@ def search_results(request):
             form = SearchForm()
     return render(request, 'blog1/search_results.html', {'form': form})
 
+def about(request):
+    return render(request, 'blog1/about.html')
+
+def get_started(request):
+    return render(request, 'blog1/get_started.html')
 
 # Utility function to render templates with common context
 def render_template(request, template_name, context=None):

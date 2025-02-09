@@ -10,15 +10,19 @@
 <body>
     <nav>
         <div class="logo">CNN.</div>
-        <div class="navf">
-          <ul>
-            <li><a href="{% url 'blog1:index' %}">Home</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="{% url 'blog1:contact' %}">Contact</a></li>
-            <li><a href="">Get Started</a></li>
-        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-
+        <div class="navf">
+            <ul>
+                <li><a href="{% url 'blog1:index' %}" {% if request.resolver_match.url_name == 'index' %}class="active"{% endif %}>Home</a></li>
+                <li><a href="{% url 'blog1:about' %}" {% if request.resolver_match.url_name == 'about' %}class="active"{% endif %}>About</a></li>
+                <li><a href="{% url 'blog1:contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}>Contact</a></li>
+                <li><a href="{% url 'blog1:get_started' %}" {% if request.resolver_match.url_name == 'get_started' %}class="active"{% endif %}>Get Started</a></li>
+            </ul>
+        </div>
         <div class="search">
             <form action="{% url 'blog1:search' %}" method="get">
                 <input type="text" placeholder="Search..." name="search_query">
@@ -93,6 +97,54 @@
             </div>
           </div>
         </div>
-      </section>
+        <!-- Add copyright notice -->
+        <div class="copyright">
+          <p>&copy; {% now "Y" %} Clinton Ageboba. All rights reserved.</p>
+        </div>
+    </section>
+
+    <!-- Add this script before closing body tag -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('.navf');
+        const searchBar = document.querySelector('.search');
+        const searchInput = document.querySelector('.search input');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            searchBar.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            // Don't close if clicking inside search form
+            if (searchBar.contains(e.target)) {
+                return;
+            }
+            
+            // Don't close nav if clicking inside nav
+            if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                // Only remove search active class if not focused on search input
+                if (!searchInput.matches(':focus')) {
+                    searchBar.classList.remove('active');
+                }
+            }
+        });
+
+        // Keep search active when focused
+        searchInput.addEventListener('focus', () => {
+            searchBar.classList.add('active');
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                searchBar.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>

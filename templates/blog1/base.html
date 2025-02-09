@@ -1,0 +1,30 @@
+<nav class="navbar">
+    <div class="logo">CNN.</div>
+    
+    <!-- Hamburger Menu Button -->
+    <div class="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="nav-content">
+        <div class="navf">
+            <ul>
+                <li><a href="{% url 'blog1:index' %}">Home</a></li>
+                <li><a href="{% url 'blog1:about' %}">About</a></li>
+                <li><a href="{% url 'blog1:contact' %}">Contact</a></li>
+                <li><a href="{% url 'blog1:get_started' %}">Get Started</a></li>
+            </ul>
+        </div>
+
+        <div class="search">
+            <form action="{% url 'blog1:search' %}" method="get">
+                <input type="text" placeholder="Search..." name="search_query">
+                <button>
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
